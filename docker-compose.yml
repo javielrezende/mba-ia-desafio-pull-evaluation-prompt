@@ -1,0 +1,16 @@
+services:
+  python_app:
+    build: .
+    env_file:
+      - .env
+    volumes:
+      - ./:/app
+    tty: true
+    stdin_open: true
+    working_dir: /app
+    networks:
+      - default
+
+networks:
+  default:
+    driver: bridge
