@@ -8,7 +8,7 @@ Projeto do desafio de Prompt Engineering com **LangChain** e **LangSmith**: sinc
 |------|-----------|--------|
 | 1 | Pull do prompt de baixa qualidade (`bug_to_user_story_v1`) | Concluída |
 | 2 | Otimização do prompt (`bug_to_user_story_v2`) | Concluída |
-| 3 | Push do prompt otimizado para o LangSmith Hub | Pendente |
+| 3 | Push do prompt otimizado para o LangSmith Hub | Concluída |
 | 4 | Avaliação com métricas (meta: todas ≥ 0.9) | Pendente |
 | 5 | Testes automatizados em `tests/test_prompts.py` | Pendente |
 
@@ -133,11 +133,28 @@ O prompt otimizado está em `prompts/bug_to_user_story_v2.yml`. Ele transforma e
 
 ---
 
+## Fase 3 — Push para o LangSmith Hub (concluída)
+
+Com o prompt otimizado e validado localmente, o script de push o publica no seu workspace do LangSmith Hub:
+
+```bash
+python src/push_prompts.py
+```
+
+O script realiza as seguintes etapas:
+
+1.  **Carregamento Local**: lê o arquivo `prompts/bug_to_user_story_v2.yml`.
+2.  **Validação**: verifica se a estrutura do prompt (system, user, variáveis) está correta antes de tentar o upload.
+3.  **Comparação Inteligente**: faz um pull da versão atual no Hub (se existir) e compara com a versão local. Se forem idênticos, o push é ignorado para evitar commits duplicados.
+4.  **Push Público**: faz o upload para `{USERNAME_LANGSMITH_HUB}/bug_to_user_story_v2` com visibilidade pública.
+5.  **Metadados e README**: anexa as técnicas de Prompt Engineering utilizadas e a versão nos metadados do prompt no Hub.
+
+---
+
 ## Próximas fases (em breve)
 
 As seções abaixo serão preenchidas nas próximas entregas:
 
-- **Fase 3:** `python src/push_prompts.py` — publicar `{USERNAME_LANGSMITH_HUB}/bug_to_user_story_v2` no Hub
 - **Fase 4:** `python src/evaluate.py` — avaliar contra o dataset e iterar até métricas ≥ 0.9
 - **Fase 5:** `pytest tests/test_prompts.py` — testes de validação do prompt
 - **Resultados finais:** link do LangSmith, screenshots e tabela v1 vs v2
@@ -163,7 +180,7 @@ mba-ia-desafio-pull-evaluation-prompt/
 │
 ├── src/
 │   ├── pull_prompts.py            # Fase 1 — pull do Hub
-│   ├── push_prompts.py            # Fase 3 — push (a implementar)
+│   ├── push_prompts.py            # Fase 3 — push para o Hub
 │   ├── evaluate.py                # Fase 4 — avaliação
 │   ├── metrics.py
 │   └── utils.py
