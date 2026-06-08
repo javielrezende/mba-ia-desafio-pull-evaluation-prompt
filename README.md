@@ -10,7 +10,7 @@ Projeto do desafio de Prompt Engineering com **LangChain** e **LangSmith**: sinc
 | 2 | Otimização do prompt (`bug_to_user_story_v2`) | ✅ Concluída |
 | 3 | Push do prompt otimizado para o LangSmith Hub | ✅ Concluída |
 | 4 | Avaliação com métricas (meta: todas ≥ 0.9) | ✅ Concluída |
-| 5 | Testes automatizados em `tests/test_prompts.py` | 🔄 Pendente |
+| 5 | Testes automatizados em `tests/test_prompts.py` | ✅ Concluída |
 
 Este README será incrementado a cada nova entrega.
 
@@ -168,11 +168,14 @@ Os resultados detalhados estão na seção **Resultados da Avaliação Final** a
 
 ---
 
-## Próximas fases (em breve)
+## Fase 5 — Testes de Validação (concluída)
 
-As seções abaixo serão preenchidas nas próximas entregas:
+Foi implementada uma suíte de testes estáticos usando `pytest` para garantir a integridade do prompt `bug_to_user_story_v2.yml`. Os testes validam a existência do system prompt, definição de persona, menção ao formato de saída, presença de exemplos few-shot, ausência de [TODO]s e uso de técnicas de Prompt Engineering.
 
-- **Fase 5:** `pytest tests/test_prompts.py` — testes de validação do prompt
+Para rodar os testes:
+```bash
+docker compose exec python_app pytest tests/test_prompts.py -v
+```
 
 ---
 
